@@ -1,5 +1,5 @@
 V=2.1_rc19
-V_JJO=2.1_rc19c-ipv6-0.4.4
+V_JJO=2.1_rc19c-ipv6-0.4.6
 
 JJO_TAG_0=v$(V)
 JJO_TAG_1=v$(V_JJO)
@@ -19,7 +19,7 @@ wrk/$(DIR_JJO): $(JJO_GIT_DIR)
 	test -d out || mkdir out
 	test -d wrk || mkdir wrk
 	tar -C wrk -zxvf $(TAR)
-	(cd $(JJO_GIT_DIR) && git diff -r $(JJO_TAG_0) $(JJO_TAG_1)) | patch -d wrk/$(DIR)
+	(cd $(JJO_GIT_DIR) && git diff -r $(JJO_TAG_0) $(JJO_TAG_1)) | patch -d wrk/$(DIR) -p1
 	cd wrk/$(DIR) && aclocal && automake && autoconf
 	cd wrk && mv $(DIR) $(DIR_JJO)
 	tar -C wrk -zxvf $(TAR)

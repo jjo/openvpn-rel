@@ -17,24 +17,19 @@ TARGET_PATCH=out/openvpn-$(V_JJO_FULL).patch.gz
 TARGET_TAR=out/openvpn-$(V_JJO_FULL).tar.gz
 
 TARGET=$(TARGET_PATCH) $(TARGET_TAR)
+
+# Main target(s):
 all: $(TAR) $(TARGET)
+exe: out/openvpn-$(V_JJO).exe.zip
 
 wrk/$(DIR_JJO): $(JJO_GIT_DIR)
 	test -d out || mkdir out
 	test -d wrk || mkdir wrk
 	tar -C wrk -zxvf $(TAR)
 	(cd $(JJO_GIT_DIR) && git diff -r $(JJO_TAG_0) $(JJO_TAG_1)) | patch -d wrk/$(DIR) -p1
-	#cd wrk/$(DIR) && aclocal && automake && autoconf
 	cd wrk/$(DIR) && autoreconf -i -v
 	cd wrk && mv $(DIR) $(DIR_JJO)
 	tar -C wrk -zxvf $(TAR)
-
-exe: out/openvpn-$(V_JJO).exe.zip
-
-out/openvpn-$(V_JJO).exe.zip: $(JJO_GIT_DIR)/openvpn.exe
-	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe . && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum 
-	zip -j $@ wrk/openvpn.exe wrk/openvpn.exe.md5sum.asc
-	ls -l $@
 
 $(TARGET_PATCH): wrk/$(DIR_JJO)
 	(cd wrk&& diff -x "*~" -uN $(DIR) $(DIR_JJO)) | gzip > $(TARGET_PATCH)
@@ -45,5 +40,11 @@ $(TARGET_TAR): wrk/$(DIR_JJO)
 
 $(TAR):
 	wget http://www.openvpn.net/release/$(TAR)
+
+out/openvpn-$(V_JJO).exe.zip: $(JJO_GIT_DIR)/openvpn.exe
+	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe . && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum 
+	zip -j $@ wrk/openvpn.exe wrk/openvpn.exe.md5sum.asc
+	ls -l $@
+
 clean:
 	rm -rf wrk out $(TARGET)

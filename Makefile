@@ -15,12 +15,13 @@ DIR_JJO=openvpn-$(V_JJO_FULL)
 
 TARGET_PATCH=out/openvpn-$(V_JJO_FULL).patch.gz
 TARGET_TAR=out/openvpn-$(V_JJO_FULL).tar.gz
+TARGET_EXE=out/openvpn-$(V_JJO).exe.zip
 
 TARGET=$(TARGET_PATCH) $(TARGET_TAR)
 
 # Main target(s):
 all: $(TAR) $(TARGET)
-exe: out/openvpn-$(V_JJO).exe.zip
+exe: $(TARGET_EXE)
 
 wrk/$(DIR_JJO): $(JJO_GIT_DIR)
 	test -d out || mkdir out
@@ -41,7 +42,7 @@ $(TARGET_TAR): wrk/$(DIR_JJO)
 $(TAR):
 	wget http://www.openvpn.net/release/$(TAR)
 
-out/openvpn-$(V_JJO).exe.zip: $(JJO_GIT_DIR)/openvpn.exe
+$(TARGET_EXE): $(JJO_GIT_DIR)/openvpn.exe
 	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe . && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum 
 	zip -j $@ wrk/openvpn.exe wrk/openvpn.exe.md5sum.asc
 	ls -l $@

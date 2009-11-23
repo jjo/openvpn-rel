@@ -1,7 +1,7 @@
 ## ../rel/Makefile (this file, part of git://github.com/jjo/openvpn-rel.git)
 ## ../openvpn/     (git://github.com/jjo/openvpn-ipv6.git)
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
-V=2.1_rc21
+V=2.1_rc22
 V_JJO=ipv6-0.4.10
 V_JJO_FULL=$(V)-$(V_JJO)
 

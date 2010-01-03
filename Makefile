@@ -1,7 +1,7 @@
 ## ../rel/Makefile (this file, part of git://github.com/jjo/openvpn-rel.git)
 ## ../openvpn/     (git://github.com/jjo/openvpn-ipv6.git)
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
-V=2.1_rc22
+V=2.1.1
 V_JJO=ipv6-0.4.10
 V_JJO_FULL=$(V)-$(V_JJO)
 
@@ -17,7 +17,7 @@ TARGET_PATCH=out/openvpn-$(V_JJO_FULL).patch.gz
 TARGET_TAR=out/openvpn-$(V_JJO_FULL).tar.gz
 TARGET_EXE=out/openvpn.exe-$(V_JJO_FULL).zip
 
-TARGET=$(TARGET_PATCH) $(TARGET_TAR)
+TARGET=$(TARGET_PATCH)
 
 # Main target(s):
 all: $(TAR) $(TARGET)

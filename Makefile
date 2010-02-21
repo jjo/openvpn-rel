@@ -2,7 +2,7 @@
 ## ../openvpn/     (git://github.com/jjo/openvpn-ipv6.git)
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
 V=2.1.1
-V_JJO=ipv6-0.4.10
+V_JJO=ipv6-0.4.11
 V_JJO_FULL=$(V)-$(V_JJO)
 
 JJO_TAG_0=v$(V)

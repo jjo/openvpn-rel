@@ -1,7 +1,10 @@
 ## ../rel/Makefile (this file, part of git://github.com/jjo/openvpn-rel.git)
 ## ../openvpn/     (git://github.com/jjo/openvpn-ipv6.git)
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
-V=2.1.3
+
+#DL=http://www.openvpn.net/release
+DL=http://swupdate.openvpn.net/community/releases
+V=2.2-beta5
 V_JJO=ipv6-0.4.15
 V_JJO_FULL=$(V)-$(V_JJO)
 
@@ -40,7 +43,7 @@ $(TARGET_TAR): wrk/$(DIR_JJO)
 	tar -C wrk -zcvf $(TARGET_TAR) $(DIR_JJO)
 
 $(TAR):
-	wget http://www.openvpn.net/release/$(TAR)
+	wget $(DL)/$(TAR)
 
 $(TARGET_EXE): $(JJO_GIT_DIR)/openvpn.exe
 	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe . && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum 

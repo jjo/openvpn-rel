@@ -2,9 +2,8 @@
 ## ../openvpn/     (git://github.com/jjo/openvpn-ipv6.git)
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
 
-#DL=http://www.openvpn.net/release
 DL=http://swupdate.openvpn.net/community/releases
-V=2.2-beta5
+V=2.2-RC2
 V_JJO=ipv6-0.4.15
 V_JJO_FULL=$(V)-$(V_JJO)
 

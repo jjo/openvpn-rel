@@ -4,7 +4,7 @@
 
 DL=http://swupdate.openvpn.net/community/releases
 V=2.2-RC2
-V_JJO=ipv6-0.4.15
+V_JJO=ipv6-0.4.16
 V_JJO_FULL=$(V)-$(V_JJO)
 
 JJO_TAG_0=v$(V)
@@ -45,8 +45,10 @@ $(TAR):
 	wget $(DL)/$(TAR)
 
 $(TARGET_EXE): $(JJO_GIT_DIR)/openvpn.exe
-	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe . && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum 
-	zip -j $@ wrk/openvpn.exe wrk/openvpn.exe.md5sum.asc
+	cd wrk && $(JJO_GIT_DIR)/openvpn.exe --version > openvpn-version.txt; test -s openvpn-version.txt
+	cd wrk && cp -p $(JJO_GIT_DIR)/openvpn.exe .
+	cd wrk && md5sum openvpn.exe > openvpn.exe.md5sum && gpg -sat openvpn.exe.md5sum
+	zip -j $@ wrk/openvpn.exe wrk/openvpn.exe.md5sum.asc wrk/openvpn-version.txt
 	ls -l $@
 
 clean:

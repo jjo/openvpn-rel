@@ -3,7 +3,7 @@
 ## ../tests/       (git://github.com/jjo/openvpn-tests.git)
 
 DL=http://swupdate.openvpn.net/community/releases
-V=2.2-RC2
+V=2.2.0
 V_JJO=ipv6-0.4.16
 V_JJO_FULL=$(V)-$(V_JJO)
 
